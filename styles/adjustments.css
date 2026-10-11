@@ -1,0 +1,244 @@
+/* Small accessibility and interaction refinements; original colour theme retained. */
+:root { --mot-navy: #172547; --mot-cream: #fbf6ec; --mot-gold: #f5aa24; }
+html { scroll-behavior: smooth; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 1000; padding: 12px 18px; color: white; background: var(--mot-navy); border-radius: 6px; }
+.skip-link:focus { top: 12px; }
+.Navbar-dropdown[hidden] { display: none !important; }
+.Navbar-dropdown { max-height: calc(100svh - 130px); overflow-y: auto; }
+.Footer-socials a { color: inherit; }
+.TeacherMoms-track { gap: 0; }
+.simple-page { max-width: 1100px; padding: 150px 24px 80px; margin: auto; color: var(--mot-navy); }
+.simple-page h1 { font-family: Georgia, serif; font-size: clamp(32px, 5vw, 52px); }
+.site-map-links { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 14px; padding: 0; list-style: none; }
+.site-map-links a { display: block; border: 1px solid #dfd5c3; padding: 20px; border-radius: 12px; color: var(--mot-navy); background: #fffaf2; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+/* Responsive homepage image */
+.HomeHero-photo {
+  position: absolute;
+  inset: auto;
+  top: 50%;
+  right: 0;
+  bottom: auto;
+
+  width: 56%;
+  height: auto;
+
+  transform: translateY(-42%);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.HomeHero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+  object-position: center;
+
+  /* A softer image that does not overpower the heading */
+  opacity: 0.9;
+}
+
+/* Blend the actual image edges into the page background */
+.HomeHero-photoFade {
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to right,
+      var(--cream) 0%,
+      transparent 30%,
+      transparent 92%,
+      var(--cream) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--cream) 0%,
+      transparent 18%,
+      transparent 76%,
+      var(--cream) 100%
+    );
+}
+
+/* The gradient replaces the image's hard curved cutout */
+.HomeHero-photoCurve {
+  display: none;
+}
+
+/* Tablets: place the photo below the text */
+@media (max-width: 1024px) {
+  .HomeHero-hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .HomeHero-heroInner {
+    order: 1;
+    width: calc(100% - 48px);
+    padding: 140px 0 16px;
+  }
+
+  .HomeHero-content {
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .HomeHero-photo {
+    position: relative;
+    inset: auto;
+    order: 2;
+
+    width: min(76%, 560px);
+    height: auto;
+    margin: 0 auto 48px;
+
+    transform: none;
+  }
+
+  .HomeHero-photoFade {
+    background:
+      linear-gradient(
+        to right,
+        var(--cream),
+        transparent 16%,
+        transparent 84%,
+        var(--cream)
+      ),
+      linear-gradient(
+        to bottom,
+        var(--cream),
+        transparent 20%,
+        transparent 72%,
+        var(--cream)
+      );
+  }
+}
+
+/* Phones: compact image with comfortable spacing */
+@media (max-width: 640px) {
+  .HomeHero-heroInner {
+    width: calc(100% - 36px);
+    padding-top: 120px;
+    padding-bottom: 12px;
+  }
+
+  .HomeHero-photo {
+    width: min(90%, 380px);
+    margin-bottom: 44px;
+  }
+
+  .HomeHero-photo img {
+    opacity: 0.85;
+  }
+}
+/* Teacher photos: show the complete image */
+.TeacherMoms-portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: clamp(250px, 25vw, 340px);
+  overflow: hidden;
+  background: #f3eee5;
+}
+
+.TeacherMoms-portrait > .TeacherMoms-photoImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+/* Tablets */
+@media (max-width: 960px) {
+  .TeacherMoms-portrait {
+    height: 300px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .TeacherMoms-portrait {
+    height: clamp(260px, 80vw, 360px);
+  }
+}
+/* Equal-width cards, including the hovered card */
+.TeacherMoms-carousel .TeacherMoms-card {
+  flex: 1 1 0;
+  min-width: 0;
+  background: #fff;
+  transform: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.TeacherMoms-carousel .TeacherMoms-card.TeacherMoms-expanded {
+  flex: 1 1 0;
+  transform: none;
+  border-color: #c5aa78;
+  box-shadow: 0 8px 24px #1725470d;
+}
+
+/* A deliberate portrait frame instead of a wide image banner */
+.TeacherMoms-carousel .TeacherMoms-portrait {
+  display: block;
+  position: relative;
+
+  width: clamp(150px, 15vw, 185px);
+  max-width: calc(100% - 40px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+
+  margin: 26px auto 0;
+  padding: 0;
+  overflow: hidden;
+
+  background: #f3eee5;
+  border-radius: 18px;
+}
+
+/* Gentle portrait crop; no stretching */
+.TeacherMoms-carousel .TeacherMoms-portrait > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 32%;
+
+  border-radius: inherit;
+  transform: none;
+  filter: none;
+}
+
+.TeacherMoms-carousel .TeacherMoms-content {
+  padding: 24px;
+}
+
+/* Tablet */
+@media (max-width: 960px) {
+  .TeacherMoms-carousel .TeacherMoms-portrait {
+    width: 175px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .TeacherMoms-carousel .TeacherMoms-portrait {
+    width: 180px;
+    margin-top: 24px;
+  }
+
+  .TeacherMoms-carousel .TeacherMoms-content {
+    padding: 22px;
+  }
+}

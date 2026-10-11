@@ -1,0 +1,1 @@
+export const locations = [{"name": "London", "slug": "london"}, {"name": "Leicester", "slug": "leicester"}, {"name": "Birmingham", "slug": "birmingham"}, {"name": "Manchester", "slug": "manchester"}, {"name": "Coventry", "slug": "coventry"}, {"name": "Slough", "slug": "slough"}] as const;
